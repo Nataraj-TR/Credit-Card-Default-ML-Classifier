@@ -1,15 +1,3 @@
-"""
-Train and evaluate 5 classifiers on the UCI Default of Credit Card Clients dataset.
-
-Usage:
-    python train_models.py                          # expects UCI_Credit_Card.csv in same folder
-    python train_models.py path/to/your_file.csv
-
-Outputs:
-    model/*.joblib          one saved pipeline per model
-    test_data.csv           held-out test split (features + target) for the Streamlit app
-    metrics_results.csv     comparison table for the README
-"""
 import os
 import sys
 
@@ -32,19 +20,19 @@ RANDOM_STATE = 42
 TARGET = "default"
 
 # ---------------------------------------------------------------- 1. load
-csv_path = sys.argv[1] if len(sys.argv) > 1 else "UCI_Credit_Card.csv"
+csv_path = "UCI_Credit_Card.csv"
 df = pd.read_csv(csv_path)
 print("Raw shape:", df.shape)
 
 # ---------------------------------------------------------------- 2. clean
-# Drop ID column if present (any capitalisation)
+# Drop ID column 
 df = df.drop(columns=[c for c in df.columns if c.lower() == "id"])
 
-# Rename target column (Kaggle: 'default.payment.next.month')
+# Rename target column
 target_candidates = [c for c in df.columns if "default" in c.lower()]
 df = df.rename(columns={target_candidates[0]: TARGET})
 
-# Undocumented category codes -> merge into 'other'
+
 df["EDUCATION"] = df["EDUCATION"].replace({0: 4, 5: 4, 6: 4})
 df["MARRIAGE"] = df["MARRIAGE"].replace({0: 3})
 
