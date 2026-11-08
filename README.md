@@ -80,6 +80,7 @@ All five models were trained on the same training split and evaluated on the sam
 | Support Vector Machine | 0.8162 | 0.7186 | 0.6662 | 0.3384 | 0.4488 | 0.3814 |
 
 Precision, Recall and F1 are reported for the positive class (default = 1).
+The live Streamlit app runs a newer scikit-learn version than the training environment, so its KNN row differs very slightly (Accuracy 0.8060, Precision 0.6146, Recall 0.3293, F1 0.4289, MCC 0.3476; AUC is unchanged). This is a difference of one or two test rows caused by the library version, and the other four models match exactly.
 
 ### Observations on model performance
 
